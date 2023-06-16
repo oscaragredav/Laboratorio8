@@ -1,4 +1,4 @@
-package Servlets;
+package controllers;
 
 public class LoginServlet {
 }
