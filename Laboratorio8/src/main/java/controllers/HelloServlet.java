@@ -1,4 +1,4 @@
-package com.example.laboratorio8;
+package controllers;
 
 import java.io.*;
 import jakarta.servlet.http.*;
