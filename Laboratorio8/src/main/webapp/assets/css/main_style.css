@@ -64,8 +64,6 @@ form p {
     margin-right: 10px;
 }
 
-
-
 .header-area {
     left: 0;
     right: 0;
@@ -101,6 +99,7 @@ form p {
     position: relative;
     z-index: 999;
 }
+
 
 .header-area .main-nav .nav li:last-child {
     padding-right: 0;
@@ -159,6 +158,19 @@ form p {
 
 .background-header .main-nav ul.nav {
     margin-top: 20px;
+}
+
+.header-area .main-nav ul.welcome-message {
+    flex-basis: 100%;
+    display: flex;
+    margin-top: 5px;
+    justify-content: center;
+    -webkit-transition: all 0.3s ease 0s;
+    -moz-transition: all 0.3s ease 0s;
+    -o-transition: all 0.3s ease 0s;
+    transition: all 0.3s ease 0s;
+    position: relative;
+    z-index: 999;
 }
 
 

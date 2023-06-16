@@ -34,15 +34,23 @@
                         </li>
                     </ul>
 
+                    <% if(usuarioSession.getIdUsuario() == 0) {%>
+
+                    <%} else {%>
+                    <ul class="welcome-message text-center">
+                        <li>
+                            <h5>¡Bienvenid@ <%= usuarioSession.getNombre() + " " + usuarioSession.getApellido() %> !</h5>
+                            <h6>Actualmente tu status es: <%= usuarioSession.getEstatus().getNombreStatus() %></h6>
+                        </li>
+                    </ul>
+
 
                     <ul class="nav">
-                        <% if(usuarioSession.getIdUsuario() == 0) {%>
 
-                        <%} else {%>
                         <li><a class="<%=request.getParameter("page").equals("viajes")? "active": "" %>" href="<%=request.getContextPath()%>/mainservlet">Lista de viajes</a></li>
                         <li><a href="<%=request.getContextPath()%>/loginServlet?action=logout">Cerrar Sesión</a></li>
-                        <%} %>
                     </ul>
+                    <%} %>
                 </nav>
             </div>
         </div>
