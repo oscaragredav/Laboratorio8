@@ -1,16 +1,29 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Usuario
-  Date: 15/06/2023
-  Time: 21:08
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
-<head>
-    <title>Title</title>
-</head>
-<body>
+<header class="header-area header-sticky">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <nav class="main-nav">
+                    <!-- ***** Logo Start ***** -->
+                    <ul class="header-logo-img">
+                        <li><a href="#"><img src="<%=request.getContextPath()%>#" alt="logo" class = logo-imagen style="width: 75px"></a>
+                        </li>
+                        <li>
+                            <span class="vertical-separator"></span>
+                        </li>
+                        <li>
+                            <img src="<%=request.getContextPath()%>#" alt="logo" class="logo-imagen" style="width: 60px">
 
-</body>
-</html>
+                        </li>
+                    </ul>
+
+
+                    <ul class="nav">
+                        <li><a class="<%=request.getParameter("page").equals("usuarios")? "active": "" %>" href="<%=request.getContextPath()%>/#">Crear usuario</a></li>
+                        <li><a class="<%=request.getParameter("page").equals("viajes")? "active": "" %>" href="<%=request.getContextPath()%>/#">Lista de viajes</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>

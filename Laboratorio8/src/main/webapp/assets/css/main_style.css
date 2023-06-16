@@ -1,0 +1,227 @@
+header {
+    background-color: #030309;
+
+}
+
+nav li{
+    display: inline;
+    margin: 0 5px 0 5px;
+}
+
+nav a{
+    text-transform: capitalize;
+    color: black;
+    font-weight: bold;
+    font-size: 15px;
+    text-decoration: none;
+}
+
+.bgr-body{
+    /*padding: 0 60px 0 60px;*/
+    /*background-image: url(../images/fifalogo.jpg);*/
+    background-size: 185px;
+    background-repeat: repeat;
+}
+
+.vertical-separator {
+    width: 1px;
+    height: 55px;
+    display: block;
+    background-color: #d8d8d8;
+}
+ .header-logo-img {
+    display: flex;
+    align-items: center;
+    width: 250px;
+    justify-content: space-evenly;
+}
+
+
+.header-logo-img a img {
+    margin-right: 10px;
+    border-radius: 18px
+}
+
+.header-logo-img img {
+    margin-right: 10px;
+}
+
+
+
+.header-area {
+    left: 0;
+    right: 0;
+    z-index: 100;
+    -webkit-transition: all .5s ease 0s;
+    -moz-transition: all .5s ease 0s;
+    -o-transition: all .5s ease 0s;
+    transition: all .5s ease 0s;
+}
+
+.header-area .container {
+    padding: 20px;
+}
+.header-area .logo {
+    margin-left: 0;
+    margin-top: 30px;
+}
+
+.header-area .main-nav {
+    background: transparent;
+    display: flex;
+}
+
+.header-area .main-nav ul.nav {
+    border-radius: 0 0 25px 25px;
+    flex-basis: 100%;
+    margin-top: 5px;
+    justify-content: right;
+    -webkit-transition: all 0.3s ease 0s;
+    -moz-transition: all 0.3s ease 0s;
+    -o-transition: all 0.3s ease 0s;
+    transition: all 0.3s ease 0s;
+    position: relative;
+    z-index: 999;
+}
+
+.header-area .main-nav .nav li:last-child {
+    padding-right: 0;
+}
+
+.header-area .main-nav .nav li {
+    padding-left: 10px;
+    padding-right: 10px;
+    height: 40px;
+    line-height: 40px;
+}
+
+.header-area .main-nav .nav li a {
+    display: inline;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-radius: 20px;
+    font-weight: 300;
+    font-size: 16px;
+    height: 40px;
+    line-height: 40px;
+    text-transform: capitalize;
+    color: #fff;
+    -webkit-transition: all 0.4s ease 0s;
+    -moz-transition: all 0.4s ease 0s;
+    -o-transition: all 0.4s ease 0s;
+    transition: all 0.4s ease 0s;
+    border: transparent;
+    letter-spacing: 1px;
+}
+
+.header-area .main-nav .nav li:last-child a {
+    background-color: #202085;
+    font-weight: 500;
+}
+
+.header-area .main-nav .nav li:last-child:hover a {
+    background-color: #3b3bb9;
+}
+
+.header-area .main-nav .nav li:hover a {
+    background-color: rgba(255, 255, 255, 0.10);
+}
+
+.header-area .main-nav .nav li a.active {
+    color: #fff;
+    background-color: rgba(255, 255, 255, 0.10);
+}
+
+.background-header .main-nav .nav li a.active {
+    color: #fff;
+    background-color: rgba(255, 255, 255, 0.10);
+}
+
+
+.background-header .main-nav ul.nav {
+    margin-top: 20px;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.tabla{
+    margin-bottom: 10px;
+    margin-top: 10px;
+    width: 100%;
+    overflow-x: auto;
+}
+
+.tabla table {
+    width: 100%;
+    table-layout: fixed;
+}
+.tabla th, .tabla td {
+    width: auto;
+}
+
+.tabla thead tr {
+    background-color: #110e0e;
+    color: #fff;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+#bgr-img {
+    background-color: #222;
+    background-image: url(../images/fondo.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    height: 70vh;
+    min-height: 300px;
+    position: relative;
+}
+
+#bgr-img .img-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+#bgr-img .img-title {
+    font-size: 40px;
+    margin-bottom: 20px;
+    color: white;
+    text-shadow: -2px -2px 0 black, 2px -2px 0 black, -2px 2px 0 black, 2px 2px 0 black;
+
+
+}
+
+#bgr-img .img-subtitle {
+    font-size: 24px;
+    color: white;
+    text-shadow: -2px -2px 0 black, 2px -2px 0 black, -2px 2px 0 black, 2px 2px 0 black;
+
+}
+
+footer {
+    background-color: #030309;
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: 100px;
+}
+
+footer p {
+    text-align: center;
+    line-height: 60px;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.styled-text{
+    margin: 20px 0;
+    padding: 10px;
+    background-color: #f5f5f5;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
