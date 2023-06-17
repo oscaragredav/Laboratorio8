@@ -30,7 +30,7 @@ public class MainServlet extends HttpServlet {
                     view = request.getRequestDispatcher("lista_viajes.jsp");
                     view.forward(request, response);
                 } else {
-                    response.sendRedirect(request.getContextPath()+"/mainservlet");
+                    response.sendRedirect(request.getContextPath()+"/loginServlet");
 
                 }
 
