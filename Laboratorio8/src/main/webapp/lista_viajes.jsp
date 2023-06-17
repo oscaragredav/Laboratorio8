@@ -1,9 +1,15 @@
+<%@ page import="Beans.Viaje" %>
+<%@ page import="java.util.ArrayList" %>
 <%  response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
     response.setHeader("Pragma", "no-cache");
     response.setDateHeader("Expires", 0);
 %>
 
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+
+<% ArrayList<Viaje> lista = (ArrayList<Viaje>) request.getAttribute("listaViajes");%>
+
+
 <!DOCTYPE html>
 <html>
 <jsp:include page="/static/head.jsp"/>
@@ -68,29 +74,38 @@
             </tr>
             </thead>
 
-            <%
-                //for ( : ) {
-            %>
+
+            <% for (Viaje v : lista) { %>
+
+
             <tr>
                 <td>
+                    <%=v.getIdViaje()%>
                 </td>
                 <td>
+                    <%=v.getFechaReserva()%>
                 </td>
                 <td>
+                    <%=v.getFechaViaje()%>
                 </td>
                 <td>
+                    <%=v.getCiudadOrigen()%>
                 </td>
                 <td>
+                    <%=v.getCiudadDestino()%>
                 </td>
                 <td>
+                    <%=v.getSeguro().getNombreSeguro()%>
                 </td>
                 <td>
+                    <%=v.getCantidad()%>
                 </td>
                 <td>
+                    <%=v.getCostoTotal()%>
                 </td>
 
                 <%
-                    //}
+                    }
                 %>
 
             </tr>

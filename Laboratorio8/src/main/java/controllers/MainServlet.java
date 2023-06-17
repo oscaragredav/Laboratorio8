@@ -1,8 +1,10 @@
 package controllers;
 
 import Beans.Usuario;
+import Beans.Viaje;
 import Daos.EspecialidadDao;
 import Daos.UsuarioDao;
+import Daos.ViajeDao;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -20,6 +22,7 @@ public class MainServlet extends HttpServlet {
         String action = request.getParameter("action") == null ? "listaViajes" : request.getParameter("action");
         RequestDispatcher view;
         EspecialidadDao especialidadDao = new EspecialidadDao();
+        ViajeDao viajeDao = new ViajeDao();
 
 
         switch (action) {
@@ -27,6 +30,7 @@ public class MainServlet extends HttpServlet {
                 Usuario usuario = (Usuario) request.getSession().getAttribute("usuarioSession");
 
                 if(usuario != null && usuario.getIdUsuario() != 0){
+                    request.setAttribute("listaViajes", viajeDao.listarViaje());
                     view = request.getRequestDispatcher("lista_viajes.jsp");
                     view.forward(request, response);
                 } else {
