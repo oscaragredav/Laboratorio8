@@ -11,6 +11,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 
@@ -24,21 +25,38 @@ public class MainServlet extends HttpServlet {
         EspecialidadDao especialidadDao = new EspecialidadDao();
         ViajeDao viajeDao = new ViajeDao();
 
+        HttpSession session = request.getSession();
+        Usuario usuario = (Usuario) session.getAttribute("usuarioSession");
 
         switch (action) {
+//            case "listaViajes":
+//                Usuario usuario = (Usuario) request.getSession().getAttribute("usuarioSession");
+//
+//                if(usuario != null && usuario.getIdUsuario() != 0){
+//                    request.setAttribute("listaViajes", viajeDao.listarViaje());
+//                    view = request.getRequestDispatcher("lista_viajes.jsp");
+//                    view.forward(request, response);
+//                } else {
+//                    response.sendRedirect(request.getContextPath()+"/loginServlet");
+//
+//                }
+//
+//
+//                break;
+
             case "listaViajes":
-                Usuario usuario = (Usuario) request.getSession().getAttribute("usuarioSession");
+//                Usuario usuario1 = (Usuario) request.getSession().getAttribute("usuarioSession");
 
                 if(usuario != null && usuario.getIdUsuario() != 0){
-                    request.setAttribute("listaViajes", viajeDao.listarViaje());
-                    view = request.getRequestDispatcher("lista_viajes.jsp");
-                    view.forward(request, response);
+                    System.out.println("SERVLET" +usuario.getIdUsuario());
+                    request.setAttribute("listaViajes", viajeDao.listarViaje(usuario.getIdUsuario()));
+                    RequestDispatcher requestDispatcher = request.getRequestDispatcher("lista_viajes.jsp");
+                    requestDispatcher.forward(request, response);
+
                 } else {
                     response.sendRedirect(request.getContextPath()+"/loginServlet");
-
+                    return;
                 }
-
-
                 break;
 
             case "crearUsuario":

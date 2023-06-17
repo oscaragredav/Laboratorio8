@@ -8,7 +8,7 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
 <% ArrayList<Viaje> lista = (ArrayList<Viaje>) request.getAttribute("listaViajes");%>
-
+<jsp:useBean id="usuarioSession" type="Beans.Usuario" scope="session" class="Beans.Usuario"/>
 
 <!DOCTYPE html>
 <html>
