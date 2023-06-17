@@ -28,7 +28,6 @@
     <span class="horizontal-separator text-center">Añade más viajes o edita alguno si así lo deseas :)</span>
     <div style="background-color: black">
     <div class="pt-2">
-        <!--it commit -m "Se añadió un pequeño diseño a la parte de Añadir y Editar viajes, también se añadió un pequeño buscador"-->
         <div class="row justify-content-center g-0">
             <div class="col-5 ms-2">
                 <form id="search" action="#" class="search-box">
