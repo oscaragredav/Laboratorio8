@@ -56,7 +56,7 @@ public class UsuarioDao extends BaseDao {
 
     public void anadirUsuario(String nombre, String apellido, int edad, int codigo, int idEspecialidad, String correo, String password){
         String query = "INSERT INTO lab8.usuario (nombre, apellido, edad, codigo, idEspecialidad, estatus, email, passwordHashed, estatus_idestatus)\n" +
-                "VALUES(?, ?, ?, ?, ?, 0, ?, ?, 1)";
+                "VALUES(?, ?, ?, ?, ?, 0, ?, SHA2(?,256), 1)";
 
         try (Connection conn = this.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(query)){

@@ -11,7 +11,7 @@
 </jsp:include>
 
 <main>
-    <section id="bgr-img" style="min-height: 91vh">
+    <section id="bgr-img" style="min-height: 100vh">
         <div class="img-container container" style="top: 50%">
                 <div class="row justify-content-center">
                     <div class="col-md-12 col-lg-10">
@@ -82,8 +82,24 @@
                                             <div class="form-group text-danger mb-3">¡Las contraseñas no coinciden!</div>
                                             <% }%>
 
-                                            <% if (request.getParameter("error") != null) {%>
-                                            <div class="form-group text-danger mb-3">Usuario o contraseña incorrectos</div>
+                                            <% if (request.getParameter("errorNombreApellido") != null) {%>
+                                            <div class="form-group text-danger mb-3">¡Cuidado! Ingresa un nombre y apellido válidos :)</div>
+                                            <% }%>
+
+                                            <% if (request.getParameter("errorEdad") != null) {%>
+                                            <div class="form-group text-danger mb-3">Lo sentimos, debes tener entre 18 y 30 para registrarte :(</div>
+                                            <% }%>
+
+                                            <% if (request.getParameter("errorCodigo") != null) {%>
+                                            <div class="form-group text-danger mb-3">Revisa tu código, ¡debe tener exactamente 8 dígitos!</div>
+                                            <% }%>
+
+                                            <% if (request.getParameter("errorCorreo") != null) {%>
+                                            <div class="form-group text-danger mb-3">Lo sentimos, debes ingresar un correo del formato PUCP (a*codigo*@pucp.edu.pe) :/</div>
+                                            <% }%>
+
+                                            <% if (request.getParameter("errorContrasena") != null) {%>
+                                            <div class="form-group text-danger mb-3">¡Hey! Tu contraseña debe tener al menos una mayúscula, un número y un caracter especial :)</div>
                                             <% }%>
 
 

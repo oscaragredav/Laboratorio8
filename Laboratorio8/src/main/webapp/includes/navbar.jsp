@@ -39,7 +39,7 @@
                     <%} else {%>
                     <ul class="welcome-message text-center">
                         <li>
-                            <h5>¡Bienvenid@ <%= usuarioSession.getNombre() + " " + usuarioSession.getApellido() %> !</h5>
+                            <h5>¡Bienvenid@ <%= usuarioSession.getNombre() + " " + usuarioSession.getApellido() %>!</h5>
                             <h6>Actualmente tu status es: <%= usuarioSession.getEstatus().getNombreStatus() %></h6>
                         </li>
                     </ul>
