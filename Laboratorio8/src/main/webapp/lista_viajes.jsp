@@ -3,13 +3,12 @@
 <html>
 <jsp:include page="/static/head.jsp"/>
 <body>
-<div class="bgr-body">
     <!-- ***** Header Area Start ***** -->
     <jsp:include page="/includes/navbar.jsp">
         <jsp:param name="page" value="viajes"/>
     </jsp:include>
     <!-- ***** Header Area End ***** -->
-
+<main>
     <!-- ***** Background Area Start ***** -->
     <section id="bgr-img">
         <div class="img-container">
@@ -25,7 +24,7 @@
     <div class="pt-4">
         <div class="row">
             <div class="col-lg-12 d-flex justify-content-end" >
-                <a id="ocultar" class="btn btn-warning" href="#">Crear nuevo usuario</a>
+                <a id="ocultar" class="btn btn-warning" href="#">Agregar nuevo viaje</a>
             </div>
         </div>
     </div>
@@ -81,7 +80,7 @@
             </tr>
         </table>
     </div>
+</main>
     <jsp:include page="/static/footer.jsp"/>
-</div>
 </body>
 </html>

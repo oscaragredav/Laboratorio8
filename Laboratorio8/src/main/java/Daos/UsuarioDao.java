@@ -54,11 +54,33 @@ public class UsuarioDao extends BaseDao {
         return usuario;
     }
 
+    public void anadirUsuario(String nombre, String apellido, int edad, int codigo, int idEspecialidad, String correo, String password){
+        String query = "INSERT INTO lab8.usuario (nombre, apellido, edad, codigo, idEspecialidad, estatus, email, passwordHashed, estatus_idestatus)\n" +
+                "VALUES(?, ?, ?, ?, ?, 0, ?, ?, 1)";
+
+        try (Connection conn = this.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(query)){
+
+            pstmt.setString(1, nombre);
+            pstmt.setString(2, apellido);
+            pstmt.setInt(3, edad);
+            pstmt.setInt(4, codigo);
+            pstmt.setInt(5, idEspecialidad);
+            pstmt.setString(6, correo);
+            pstmt.setString(7, password);
+            pstmt.executeUpdate();
+
+        } catch (SQLException throwables) {
+            System.out.println("No se pudo realizar la actualización");
+            throwables.printStackTrace();
+        }
+    }
+
 
     public Usuario validarNicknamePassword(String user, String password){
         Usuario usuario = null;
 
-        String sql = "SELECT * FROM usuario WHERE codigo = ? AND passwordHashed = SHA2(?,256)";
+        String sql = "SELECT * FROM usuario WHERE email = ? AND passwordHashed = SHA2(?,256)";
         try (Connection conn = this.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 

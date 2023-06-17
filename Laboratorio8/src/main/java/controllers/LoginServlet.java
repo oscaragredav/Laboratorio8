@@ -22,6 +22,11 @@ public class LoginServlet extends HttpServlet {
 
         switch (action){
             case "loginform":
+                Usuario usuario = (Usuario) request.getSession().getAttribute("usuarioSession");
+
+                if(usuario != null && usuario.getIdUsuario() != 0){
+                    response.sendRedirect(request.getContextPath()+"/mainservlet");
+                }
                 view = request.getRequestDispatcher("inicio_sesion.jsp");
                 view.forward(request, response);
                 break;

@@ -8,9 +8,7 @@
     <jsp:param name="page" value=""/>
 </jsp:include>
 
-
-<div class="bgr-body">
-    <!-- ***** Background Area Start ***** -->
+<main>
     <section id="bgr-img">
         <div class="img-container">
             <div class="container">
@@ -53,7 +51,7 @@
                                             </div>
 
                                             <div class="form-group mt-2">
-                                                <button type="submit" class="form-control btn btn-outline-warning px-3">Soy nuevo y quiero registrarme</button>
+                                                <a href="<%=request.getContextPath()%>/mainservlet?action=crearUsuario" class="form-control btn btn-outline-warning px-3">Soy nuevo y quiero registrarme</a>
                                             </div>
 
                                             <!--* <div class="form-group d-md-flex mt-2">
@@ -84,8 +82,8 @@
 
         </div>
     </section>
+</main>
     <!-- ***** Background Area End ***** -->
     <jsp:include page="/static/footer.jsp"/>
-</div>
 </body>
 </html>

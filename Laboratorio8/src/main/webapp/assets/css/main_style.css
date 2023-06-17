@@ -90,7 +90,7 @@ form p {
 .header-area .main-nav ul.nav {
     border-radius: 0 0 25px 25px;
     flex-basis: 100%;
-    margin-top: 5px;
+    margin: auto;
     justify-content: right;
     -webkit-transition: all 0.3s ease 0s;
     -moz-transition: all 0.3s ease 0s;
@@ -163,7 +163,7 @@ form p {
 .header-area .main-nav ul.welcome-message {
     flex-basis: 100%;
     display: flex;
-    margin-top: 5px;
+    margin: auto;
     justify-content: center;
     -webkit-transition: all 0.3s ease 0s;
     -moz-transition: all 0.3s ease 0s;
@@ -205,7 +205,7 @@ form p {
 .form-box {
     background-size: cover;
     background-position: center;
-    width: 97%;
+    width: 100%;
     max-width: 400px;
     height: fit-content;
     margin: 31px auto;
