@@ -10,6 +10,7 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <jsp:useBean type="java.util.ArrayList<Beans.Seguro>" scope="request" id="lista"/>
 
+
 <!DOCTYPE html>
 <html>
 <jsp:include page="/static/head.jsp"/>
@@ -80,7 +81,7 @@
 
 
                       <div class="form-group">
-                        <button type="submit" class="form-control btn btn-outline-warning px-3">Registrarse</button>
+                        <button type="submit" class="form-control btn btn-outline-warning px-3">Registrar viaje</button>
                       </div>
 
                         <% if (request.getParameter("errorFechaString") != null) {%>

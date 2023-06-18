@@ -1,19 +1,15 @@
-<%  response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
-    response.setHeader("Pragma", "no-cache");
-    response.setDateHeader("Expires", 0);
-%>
-
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:useBean id="usuarioSession" type="Beans.Usuario" scope="session" class="Beans.Usuario"/>
+<jsp:useBean id="usuarioActual" type="Beans.Usuario" scope="request" class="Beans.Usuario"/>
 
 <% if (usuarioSession.getIdUsuario() != 0) {%>
-    <% if(usuarioSession.getEstatus().getNombreStatus().equals("Normal")) {%>
+    <% if(usuarioActual.getEstatus().getNombreStatus().equals("Normal")) {%>
         <header class="header-area" style="background-color: darkblue">
-    <%} else if(usuarioSession.getEstatus().getNombreStatus().equals("Silver")) {%>
+    <%} else if(usuarioActual.getEstatus().getNombreStatus().equals("Silver")) {%>
         <header class="header-area" style="background-color: grey">
-    <%} else if(usuarioSession.getEstatus().getNombreStatus().equals("Gold")) {%>
-        <header class="header-area" style="background-color: darkgoldenrod">
-    <%}  else if(usuarioSession.getEstatus().getNombreStatus().equals("Platinum")) {%>
+    <%} else if(usuarioActual.getEstatus().getNombreStatus().equals("Gold")) {%>
+        <header class="header-area" style="background-color: goldenrod">
+    <%}  else if(usuarioActual.getEstatus().getNombreStatus().equals("Platinum")) {%>
         <header class="header-area" style="background-color: black">
     <%}%>
 <%} else {%>
@@ -45,7 +41,7 @@
                     <ul class="welcome-message text-center">
                         <li>
                             <h5>¡Bienvenid@ <%= usuarioSession.getNombre() + " " + usuarioSession.getApellido() %>!</h5>
-                            <h6>Actualmente tu status es: <%= usuarioSession.getEstatus().getNombreStatus() %></h6>
+                            <h6>Actualmente tu status es: <%= usuarioActual.getEstatus().getNombreStatus() %></h6>
                         </li>
                     </ul>
 

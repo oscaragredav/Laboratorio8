@@ -10,6 +10,7 @@
 <% ArrayList<Viaje> lista = (ArrayList<Viaje>) request.getAttribute("listaViajes");%>
 <jsp:useBean id="usuarioSession" type="Beans.Usuario" scope="session" class="Beans.Usuario"/>
 
+
 <!DOCTYPE html>
 <html>
 <jsp:include page="/static/head.jsp"/>
