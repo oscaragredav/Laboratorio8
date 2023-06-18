@@ -124,6 +124,8 @@ public class MainServlet extends HttpServlet {
             break;
 
             case "crearViaje":
+                //Borrar los comentarios cuando sean necesarios!
+                //int idUsuario = Integer.parseInt(request.getParameter("idUsuario"));
                 String fechaReservaString = request.getParameter("fechaReserva");
                 String fechaViajeString = request.getParameter("fechaViaje");
                 DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -145,8 +147,15 @@ public class MainServlet extends HttpServlet {
                 int cantidad = Integer.parseInt(request.getParameter("cantidad"));
                 int costoUnitario = Integer.parseInt(request.getParameter("costoUnitario"));
                 int idSeguro = Integer.parseInt(request.getParameter("listaSeguro"));
+                int costoTotal = costoUnitario * cantidad;
 
                 viajeDao.anadirViaje(fechaReserva, fechaViaje, cantidad, costoUnitario, idSeguro);
+
+                //Borrar los comentarios cuando sean necesarios!
+                // float estatus_monto = usuarioDao.obtenerUsuario(idUsuario).getEstatus_monto() + costoTotal;
+                // usuarioDao.actualizarEstatus(idUsuario,estatus_monto);
+
+
                 response.sendRedirect(request.getContextPath() + "/loginServlet");
 
                 break;

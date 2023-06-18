@@ -76,6 +76,44 @@ public class UsuarioDao extends BaseDao {
         }
     }
 
+    public void actualizarEstatus(int idUsuario, float estatus_monto){
+
+
+        String sql = "UPDATE usuario SET estatus = ?, estatus_idestatus = ? WHERE idUsuario = ?";
+
+        try (Connection conn = this.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            if(estatus_monto >= 100 && estatus_monto <1000){
+                pstmt.setFloat(1, estatus_monto);
+                pstmt.setInt(2, 2);
+                pstmt.setInt(3, idUsuario);
+
+            }else if(estatus_monto >= 1000 && estatus_monto <10000){
+                pstmt.setFloat(1, estatus_monto);
+                pstmt.setInt(2, 3);
+                pstmt.setInt(3, idUsuario);
+
+            } else if (estatus_monto >=10000) {
+                pstmt.setFloat(1, estatus_monto);
+                pstmt.setInt(2, 4);
+                pstmt.setInt(3, idUsuario);
+
+            } else {
+                pstmt.setFloat(1, estatus_monto);
+                pstmt.setInt(2, 1);
+                pstmt.setInt(3, idUsuario);
+            }
+
+            pstmt.executeUpdate();
+
+        } catch (SQLException e) {
+            System.out.println("No se pudo realizar la actualización");
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
+    }
+
 
     public Usuario validarNicknamePassword(String user, String password){
         Usuario usuario = null;
