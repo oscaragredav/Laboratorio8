@@ -105,6 +105,13 @@
                     <%=v.getCostoTotal()%>
                 </td>
 
+                <td class="button-td"><!-- Botón Borrar -->
+                    <div class="button-container">
+                        <a onclick="return confirm('¿Está seguro de borrar?')" class="btn btn-danger m-1"
+                           href="<%=request.getContextPath()%>/mainservlet?action=borrar&id=<%=v.getIdViaje()%>">Borrar</a>
+                    </div>
+                </td>
+
                 <%
                     }
                 %>
