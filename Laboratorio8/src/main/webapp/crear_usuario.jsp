@@ -63,19 +63,11 @@
                                                 </div>
                                             </div>
 
-                                            <div class="form-group mb-2">
-                                                <label class="label" >Contraseña</label>
-                                                <input type="password" class="form-control" required aria-label="inputPassword" name="inputPassword" placeholder="Contraseña">
-                                            </div>
 
-                                            <div class="form-group mb-2">
-                                                <label class="label" >Confirmar contraseña</label>
-                                                <input type="password" class="form-control" required aria-label="confirmPassword" name="confirmPassword" placeholder="Confirmar contraseña">
-                                            </div>
 
 
                                             <div class="form-group">
-                                                <button type="submit" class="form-control btn btn-outline-warning px-3">Registrarse</button>
+                                                <button type="submit" class="form-control btn btn-outline-warning px-3">Añadir Boleto</button>
                                             </div>
 
                                             <% if (request.getParameter("errorConfirmacion") != null) {%>
@@ -106,17 +98,7 @@
 
 
 
-                                            <!--* <div class="form-group d-md-flex mt-2">
-                                                 <div class="w-50 text-left">
-                                                     <label class="checkbox-wrap checkbox-primary mt-1">Recuérdame
-                                                         <input type="checkbox" checked>
-                                                         <span class="checkmark"></span>
-                                                     </label>
-                                                 </div>
-                                                 <div class="w-50 text-md-right">
-                                                     <a href="#">¿Olvidaste tu contraseña?</a>
-                                                 </div>
-                                            </div>-->
+
 
                                         </form>
 

@@ -72,7 +72,7 @@ public class ViajeDao extends BaseDao{
             while (rs.next()){
 
                 Viaje viaje = new Viaje();
-                System.out.println("DAO"+rs.getInt(1));
+//                System.out.println("DAO"+rs.getInt(1));
                 viaje.setIdViaje(rs.getInt(1));
                 viaje.setFechaReserva(rs.getDate(2));
                 viaje.setFechaViaje(rs.getDate(3));
@@ -93,7 +93,26 @@ public class ViajeDao extends BaseDao{
         } catch (SQLException ex){
             ex.printStackTrace();
         }
-        System.out.println(lista.size());
+//        System.out.println(lista.size());
         return lista;
+    }
+    public void anadirViaje(Date fechaReserva, Date fechaViaje, int cantidad, int costoUnitario, int idSeguro){
+        String sql ="INSERT into viaje (fechaReserva,fechaViaje,cantidad, costoUnitario, idSeguro) values (?,?,?,?,?)";
+
+        try (Connection conn = this.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)){
+
+            pstmt.setDate(1, fechaReserva);
+            pstmt.setDate(2, fechaViaje);
+            pstmt.setInt(3, cantidad);
+            pstmt.setInt(4, costoUnitario);
+            pstmt.setInt(5, idSeguro);
+            pstmt.executeUpdate();
+
+        } catch (SQLException throwables) {
+            System.out.println("No se pudo realizar la actualización");
+            throwables.printStackTrace();
+        }
+
     }
 }
