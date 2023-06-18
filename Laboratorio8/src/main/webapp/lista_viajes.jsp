@@ -72,6 +72,8 @@
                 </td>
                 <td>Costo total
                 </td>
+                <td>
+                </td>
             </tr>
             </thead>
 
