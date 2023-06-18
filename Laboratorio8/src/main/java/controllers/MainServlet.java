@@ -85,6 +85,10 @@ public class MainServlet extends HttpServlet {
         String action = request.getParameter("action") == null ? "listaJuegosPosteados" : request.getParameter("action");
         UsuarioDao usuarioDao = new UsuarioDao();
         ViajeDao viajeDao = new ViajeDao();
+
+        HttpSession session = request.getSession();
+        Usuario usuario = (Usuario) session.getAttribute("usuarioSession");
+
         switch (action){
             case "crearUsuario":
                 String nombre = request.getParameter("nombreUsuario");
@@ -124,6 +128,10 @@ public class MainServlet extends HttpServlet {
             break;
 
             case "crearViaje":
+
+                String ciudadOrigen = request.getParameter("ciudadOrigen");
+                String ciudadDestino = request.getParameter("ciudadDestino");
+
                 String fechaReservaString = request.getParameter("fechaReserva");
                 String fechaViajeString = request.getParameter("fechaViaje");
                 DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -135,18 +143,48 @@ public class MainServlet extends HttpServlet {
                     fechaViaje1 = dateFormat.parse(fechaViajeString);
                 } catch (ParseException e) {
                     e.printStackTrace();
-                    response.sendRedirect(request.getContextPath() + "/mainservlet?action=crearUsuario&errorContrasena");
+                    response.sendRedirect(request.getContextPath() + "/mainservlet?action=crearUsuario&errorFechaString");
 
                 }
                 java.sql.Date fechaReserva = new java.sql.Date(fechaReserva1.getTime());
                 java.sql.Date fechaViaje = new java.sql.Date(fechaViaje1.getTime());
 
-                //pre validación
-                int cantidad = Integer.parseInt(request.getParameter("cantidad"));
-                int costoUnitario = Integer.parseInt(request.getParameter("costoUnitario"));
-                int idSeguro = Integer.parseInt(request.getParameter("listaSeguro"));
+                // fechaReserva mayo a la fecha actual
+                java.util.Date fechaActual = new java.util.Date();
+                if (fechaViaje.before(fechaActual)) {
+                    response.sendRedirect(request.getContextPath() + "/mainservlet?action=crearUsuario&errorfechaViaje");
+                    return;
+                }
 
-                viajeDao.anadirViaje(fechaReserva, fechaViaje, cantidad, costoUnitario, idSeguro);
+
+                int cantidad;
+                try {
+                    cantidad = Integer.parseInt(request.getParameter("cantidad"));
+                    if (cantidad <= 0) {
+                        response.sendRedirect(request.getContextPath() + "/mainservlet?action=crearUsuario&errorCantidad");
+                        return;
+                    }
+                } catch (NumberFormatException e) {
+                    response.sendRedirect(request.getContextPath() + "/mainservlet?action=crearUsuario&errorCantidad");
+                    return;
+                }
+
+
+                int costoUnitario;
+                try {
+                    costoUnitario = Integer.parseInt(request.getParameter("costoUnitario"));
+                    if (costoUnitario <= 0) {
+                        response.sendRedirect(request.getContextPath() + "/mainservlet?action=crearUsuario&errorCostoUnitario");
+                        return;
+                    }
+                } catch (NumberFormatException e) {
+                    response.sendRedirect(request.getContextPath() + "/mainservlet?action=crearUsuario&errorCostoUnitario");
+                    return;
+                }
+
+
+                int idSeguro = Integer.parseInt(request.getParameter("listaSeguro"));
+                viajeDao.anadirViaje(ciudadOrigen, ciudadDestino, fechaReserva, fechaViaje, cantidad, costoUnitario, idSeguro,usuario.getIdUsuario());
                 response.sendRedirect(request.getContextPath() + "/loginServlet");
 
                 break;

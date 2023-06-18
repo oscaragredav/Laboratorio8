@@ -96,17 +96,20 @@ public class ViajeDao extends BaseDao{
 //        System.out.println(lista.size());
         return lista;
     }
-    public void anadirViaje(Date fechaReserva, Date fechaViaje, int cantidad, int costoUnitario, int idSeguro){
-        String sql ="INSERT into viaje (fechaReserva,fechaViaje,cantidad, costoUnitario, idSeguro) values (?,?,?,?,?)";
+    public void anadirViaje(String ciudadOrigen, String ciudadDestino,Date fechaReserva, Date fechaViaje, int cantidad, int costoUnitario, int idSeguro, int usuario_idUsuario){
+        String sql ="INSERT into viaje (ciudadOrigen, ciudadDestino, fechaReserva,fechaViaje,cantidad, costoUnitario, idSeguro,usuario_idUsuario) values (?,?,?,?,?,?,?,?)";
 
         try (Connection conn = this.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)){
 
-            pstmt.setDate(1, fechaReserva);
-            pstmt.setDate(2, fechaViaje);
-            pstmt.setInt(3, cantidad);
-            pstmt.setInt(4, costoUnitario);
-            pstmt.setInt(5, idSeguro);
+            pstmt.setString(1, ciudadOrigen);
+            pstmt.setString(2, ciudadDestino);
+            pstmt.setDate(3, fechaReserva);
+            pstmt.setDate(4, fechaViaje);
+            pstmt.setInt(5, cantidad);
+            pstmt.setInt(6, costoUnitario);
+            pstmt.setInt(7, idSeguro);
+            pstmt.setInt(8,usuario_idUsuario);
             pstmt.executeUpdate();
 
         } catch (SQLException throwables) {
