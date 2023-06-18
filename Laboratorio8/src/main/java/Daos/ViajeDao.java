@@ -117,5 +117,15 @@ public class ViajeDao extends BaseDao{
             throwables.printStackTrace();
         }
 
+
+    }
+    public void borrarViaje(int idViaje){
+        try (Connection conn = getConnection();
+             PreparedStatement pstmt = conn.prepareStatement("DELETE FROM viaje WHERE idViaje = ?")) {
+            pstmt.setInt(1, idViaje);
+            pstmt.executeUpdate();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
     }
 }

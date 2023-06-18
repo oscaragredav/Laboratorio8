@@ -76,7 +76,19 @@ public class MainServlet extends HttpServlet {
                 view = request.getRequestDispatcher("crear_viaje.jsp");
                 view.forward(request, response);
                 break;
+            case "borrar":
+                String viajeIdString = request.getParameter("id");
+                int viajeId = 0;
+                try {
+                    viajeId = Integer.parseInt(viajeIdString);
+                } catch (NumberFormatException ex) {
+                    response.sendRedirect("listaViajes");
+                    return;
+                }
+                viajeDao.borrarViaje(viajeId);
 
+                response.sendRedirect(request.getContextPath() + "/mainservlet");
+                break;
         }
     }
 
@@ -186,8 +198,8 @@ public class MainServlet extends HttpServlet {
                 int idSeguro = Integer.parseInt(request.getParameter("listaSeguro"));
                 viajeDao.anadirViaje(ciudadOrigen, ciudadDestino, fechaReserva, fechaViaje, cantidad, costoUnitario, idSeguro,usuario.getIdUsuario());
                 response.sendRedirect(request.getContextPath() + "/loginServlet");
+            break;
 
-                break;
 
         }
 
