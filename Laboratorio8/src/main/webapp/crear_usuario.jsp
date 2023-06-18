@@ -64,11 +64,21 @@
                                             </div>
 
 
+                                                <div class="form-group mb-2">
+                                                    <label class="label" >Contraseña</label>
+                                                    <input type="password" class="form-control" required aria-label="inputPassword" name="inputPassword" placeholder="Contraseña">
+                                                </div>
+
+                                                <div class="form-group mb-2">
+                                                    <label class="label" >Confirmar contraseña</label>
+                                                    <input type="password" class="form-control" required aria-label="confirmPassword" name="confirmPassword" placeholder="Confirmar contraseña">
+                                                </div>
 
 
-                                            <div class="form-group">
-                                                <button type="submit" class="form-control btn btn-outline-warning px-3">Añadir Boleto</button>
-                                            </div>
+                                                <div class="form-group">
+                                                    <button type="submit" class="form-control btn btn-outline-warning px-3">Registrarse</button>
+                                                </div>
+
 
                                             <% if (request.getParameter("errorConfirmacion") != null) {%>
                                             <div class="form-group text-danger mb-3">¡Las contraseñas no coinciden!</div>
@@ -93,11 +103,9 @@
                                             <% if (request.getParameter("errorContrasena") != null) {%>
                                             <div class="form-group text-danger mb-3">¡Hey! Tu contraseña debe tener al menos una mayúscula, un número y un caracter especial :)</div>
                                             <% }%>
-
-
-
-
-
+                                            <% if (request.getParameter("errorNumerico") != null) {%>
+                                            <div class="form-group text-danger mb-3">¡Hey! No olvides que los códigos y las edades deben ser números</div>
+                                            <% }%>
 
 
                                         </form>

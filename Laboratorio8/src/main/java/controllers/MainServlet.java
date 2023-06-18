@@ -28,6 +28,7 @@ public class MainServlet extends HttpServlet {
             throws ServletException, IOException {
         String action = request.getParameter("action") == null ? "listaViajes" : request.getParameter("action");
         RequestDispatcher view;
+        UsuarioDao usuarioDao = new UsuarioDao();
         EspecialidadDao especialidadDao = new EspecialidadDao();
         ViajeDao viajeDao = new ViajeDao();
 
@@ -54,6 +55,7 @@ public class MainServlet extends HttpServlet {
                 if(usuario != null && usuario.getIdUsuario() != 0){
 //                    System.out.println("SERVLET" +usuario.getIdUsuario());
                     request.setAttribute("listaViajes", viajeDao.listarViaje(usuario.getIdUsuario()));
+                    request.setAttribute("usuarioActual", usuarioDao.obtenerUsuario(usuario.getIdUsuario()));
                     RequestDispatcher requestDispatcher = request.getRequestDispatcher("lista_viajes.jsp");
                     requestDispatcher.forward(request, response);
                 } else {
@@ -72,6 +74,7 @@ public class MainServlet extends HttpServlet {
             case "crearViaje":
                 SeguroDao seguroDao = new SeguroDao();
                 request.setAttribute("lista", seguroDao.listaSeguro());
+                request.setAttribute("usuarioActual", usuarioDao.obtenerUsuario(usuario.getIdUsuario()));
 //                System.out.println("Lista de especialidades: " + especialidadDao.obtenerListaEspecialidades());
                 view = request.getRequestDispatcher("crear_viaje.jsp");
                 view.forward(request, response);
@@ -85,47 +88,66 @@ public class MainServlet extends HttpServlet {
         String action = request.getParameter("action") == null ? "listaJuegosPosteados" : request.getParameter("action");
         UsuarioDao usuarioDao = new UsuarioDao();
         ViajeDao viajeDao = new ViajeDao();
+
+        HttpSession session = request.getSession();
+        Usuario usuario = (Usuario) session.getAttribute("usuarioSession");
+
         switch (action){
             case "crearUsuario":
                 String nombre = request.getParameter("nombreUsuario");
                 String apellido = request.getParameter("apellidoUsuario");
-                int edad = Integer.parseInt(request.getParameter("edadUsuario"));
-                int codigo = Integer.parseInt(request.getParameter("codigoPUCP"));
                 String correo = request.getParameter("correo");
                 int idEspecialidad = Integer.parseInt(request.getParameter("listaEspecialidades"));
                 String password = request.getParameter("inputPassword");
                 String confirmPassword = request.getParameter("confirmPassword");
 
-                if (nombre.matches("^\\d.*$") || apellido.matches("^\\d.*$")) { // Validamos que nombre y apellidos no empiecen por números
-                    //NOTA: El Laboratorio específicamente pide que no EMPIECEN, si queremos que no CONTENGAN debemos usar el regex: .*\\d.*
-                    response.sendRedirect(request.getContextPath() + "/mainservlet?action=crearUsuario&errorNombreApellido");
+                int edad;
+                int codigo;
+                try {
+                    edad = Integer.parseInt(request.getParameter("edadUsuario"));
+                    codigo = Integer.parseInt(request.getParameter("codigoPUCP"));
 
-                }else if (edad < 18 || edad > 29) { // Validamos que sean mayores de edad y menores de 30
-                    response.sendRedirect(request.getContextPath() + "/mainservlet?action=crearUsuario&errorEdad");
+                    if (nombre.matches("^\\d.*$") || apellido.matches("^\\d.*$")) { // Validamos que nombre y apellidos no empiecen por números
+                        //NOTA: El Laboratorio específicamente pide que no EMPIECEN, si queremos que no CONTENGAN debemos usar el regex: .*\\d.*
+                        response.sendRedirect(request.getContextPath() + "/mainservlet?action=crearUsuario&errorNombreApellido");
 
-                }else if (String.valueOf(codigo).length() != 8) { // Validamos que el código PUCP tenga 8 dígitos numéricos
-                    response.sendRedirect(request.getContextPath() + "/mainservlet?action=crearUsuario&errorCodigo");
+                    }else if (edad < 18 || edad > 29) { // Validamos que sean mayores de edad y menores de 30
+                        response.sendRedirect(request.getContextPath() + "/mainservlet?action=crearUsuario&errorEdad");
 
-                } else if (!correo.matches("^a" + codigo +"@pucp\\.edu\\.pe$")) { // Validamos que el correo PUCP empiece por "a" y tenga "@pucp.edu.pe"
-                    response.sendRedirect(request.getContextPath() + "/mainservlet?action=crearUsuario&errorCorreo");
+                    }else if (String.valueOf(codigo).length() != 8) { // Validamos que el código PUCP tenga 8 dígitos numéricos
+                        response.sendRedirect(request.getContextPath() + "/mainservlet?action=crearUsuario&errorCodigo");
 
-                } else if (!password.matches("^(?=.*[A-Z])(?=.*\\d)(?=.*[@#$%^&+=]).*$")) { // Validamos que la contraseña tenga una letra mayúscula, un número y un carácter especial
-                    response.sendRedirect(request.getContextPath() + "/mainservlet?action=crearUsuario&errorContrasena");
+                    } else if (!correo.matches("^a" + codigo +"@pucp\\.edu\\.pe$")) { // Validamos que el correo PUCP empiece por "a" y tenga "@pucp.edu.pe"
+                        response.sendRedirect(request.getContextPath() + "/mainservlet?action=crearUsuario&errorCorreo");
 
-                }else if (!password.equals(confirmPassword)) {
+                    } else if (!password.matches("^(?=.*[A-Z])(?=.*\\d)(?=.*[@#$%^&+=]).*$")) { // Validamos que la contraseña tenga una letra mayúscula, un número y un carácter especial
+                        response.sendRedirect(request.getContextPath() + "/mainservlet?action=crearUsuario&errorContrasena");
+
+                    }else if (!password.equals(confirmPassword)) {
                         response.sendRedirect(request.getContextPath() + "/mainservlet?action=crearUsuario&errorConfirmacion"); // Validamos que la contraseña y su confimración sean iguales
 
-                } else { // Si todo funciona, se añade exitosamente el usuario :D
-                    usuarioDao.anadirUsuario(nombre, apellido, edad, codigo, idEspecialidad, correo, password);
-                    response.sendRedirect(request.getContextPath() + "/loginServlet");
+                    } else { // Si todo funciona, se añade exitosamente el usuario :D
+                        usuarioDao.anadirUsuario(nombre, apellido, edad, codigo, idEspecialidad, correo, password);
+                        response.sendRedirect(request.getContextPath() + "/loginServlet");
 
+                    }
+
+                } catch (NumberFormatException e) {
+                    e.printStackTrace();
+                    response.sendRedirect(request.getContextPath() + "/mainservlet?action=crearUsuario&errorNumerico");
                 }
+
+
 
             break;
 
             case "crearViaje":
-                //Borrar los comentarios cuando sean necesarios!
-                //int idUsuario = Integer.parseInt(request.getParameter("idUsuario"));
+
+
+                String ciudadOrigen = request.getParameter("ciudadOrigen");
+                String ciudadDestino = request.getParameter("ciudadDestino");
+
+
                 String fechaReservaString = request.getParameter("fechaReserva");
                 String fechaViajeString = request.getParameter("fechaViaje");
                 DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -137,24 +159,53 @@ public class MainServlet extends HttpServlet {
                     fechaViaje1 = dateFormat.parse(fechaViajeString);
                 } catch (ParseException e) {
                     e.printStackTrace();
-                    response.sendRedirect(request.getContextPath() + "/mainservlet?action=crearUsuario&errorContrasena");
+                    response.sendRedirect(request.getContextPath() + "/mainservlet?action=crearViaje&errorFechaString");
 
                 }
                 java.sql.Date fechaReserva = new java.sql.Date(fechaReserva1.getTime());
                 java.sql.Date fechaViaje = new java.sql.Date(fechaViaje1.getTime());
 
-                //pre validación
-                int cantidad = Integer.parseInt(request.getParameter("cantidad"));
-                int costoUnitario = Integer.parseInt(request.getParameter("costoUnitario"));
+
+                // fechaReserva mayo a la fecha actual
+                java.util.Date fechaActual = new java.util.Date();
+                if (fechaViaje.before(fechaActual)) {
+                    response.sendRedirect(request.getContextPath() + "/mainservlet?action=crearViaje&errorfechaViaje");
+                    return;
+                }
+
+
+                int cantidad;
+                try {
+                    cantidad = Integer.parseInt(request.getParameter("cantidad"));
+                    if (cantidad <= 0) {
+                        response.sendRedirect(request.getContextPath() + "/mainservlet?action=crearViaje&errorCantidad");
+                        return;
+                    }
+                } catch (NumberFormatException e) {
+                    response.sendRedirect(request.getContextPath() + "/mainservlet?action=crearViaje&errorCantidad");
+                    return;
+                }
+
+
+                int costoUnitario;
+                try {
+                    costoUnitario = Integer.parseInt(request.getParameter("costoUnitario"));
+                    if (costoUnitario <= 0) {
+                        response.sendRedirect(request.getContextPath() + "/mainservlet?action=crearViaje&errorCostoUnitario");
+                        return;
+                    }
+                } catch (NumberFormatException e) {
+                    response.sendRedirect(request.getContextPath() + "/mainservlet?action=crearViaje&errorCostoUnitario");
+                    return;
+                }
+
+
                 int idSeguro = Integer.parseInt(request.getParameter("listaSeguro"));
+                viajeDao.anadirViaje(ciudadOrigen, ciudadDestino, fechaReserva, fechaViaje, cantidad, costoUnitario, idSeguro, usuario.getIdUsuario());
+
                 int costoTotal = costoUnitario * cantidad;
-
-                viajeDao.anadirViaje(fechaReserva, fechaViaje, cantidad, costoUnitario, idSeguro);
-
-                //Borrar los comentarios cuando sean necesarios!
-                // float estatus_monto = usuarioDao.obtenerUsuario(idUsuario).getEstatus_monto() + costoTotal;
-                // usuarioDao.actualizarEstatus(idUsuario,estatus_monto);
-
+                float estatus_monto = usuarioDao.obtenerUsuario(usuario.getIdUsuario()).getEstatus_monto() + costoTotal;
+                usuarioDao.actualizarEstatus(usuario.getIdUsuario(),estatus_monto);
 
                 response.sendRedirect(request.getContextPath() + "/loginServlet");
 

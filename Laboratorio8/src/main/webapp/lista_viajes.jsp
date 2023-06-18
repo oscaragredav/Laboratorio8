@@ -1,10 +1,10 @@
-<%@ page import="Beans.Viaje" %>
-<%@ page import="java.util.ArrayList" %>
 <%  response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
     response.setHeader("Pragma", "no-cache");
     response.setDateHeader("Expires", 0);
 %>
 
+<%@ page import="Beans.Viaje" %>
+<%@ page import="java.util.ArrayList" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
 <% ArrayList<Viaje> lista = (ArrayList<Viaje>) request.getAttribute("listaViajes");%>
@@ -44,7 +44,7 @@
                 </form>
             </div>
             <div class="col-6 d-flex gap-2 me-2 justify-content-end">
-                <a id="addViaje" class="btn btn-warning" href="<%=request.getContextPath()%>/crear_usuario.jsp">Agregar nuevo viaje</a>
+                <a id="addViaje" class="btn btn-warning" href="<%=request.getContextPath()%>/mainservlet?action=crearViaje">Agregar nuevo viaje</a>
                 <a id="editViaje" class="btn btn-warning" href="#">Editar nuevo viaje</a>
             </div>
         </div>

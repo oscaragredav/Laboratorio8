@@ -1,3 +1,8 @@
+<%  response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+    response.setHeader("Pragma", "no-cache");
+    response.setDateHeader("Expires", 0);
+%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:useBean id="usuarioSession" type="Beans.Usuario" scope="session" class="Beans.Usuario"/>
 
@@ -7,7 +12,7 @@
     <%} else if(usuarioSession.getEstatus().getNombreStatus().equals("Silver")) {%>
         <header class="header-area" style="background-color: grey">
     <%} else if(usuarioSession.getEstatus().getNombreStatus().equals("Gold")) {%>
-        <header class="header-area" style="background-color: gold">
+        <header class="header-area" style="background-color: darkgoldenrod">
     <%}  else if(usuarioSession.getEstatus().getNombreStatus().equals("Platinum")) {%>
         <header class="header-area" style="background-color: black">
     <%}%>

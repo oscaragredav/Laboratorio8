@@ -5,10 +5,11 @@
   Time: 18:10
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page import="Beans.Especialidad" %>
+
 <%@ page import="Beans.Seguro" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <jsp:useBean type="java.util.ArrayList<Beans.Seguro>" scope="request" id="lista"/>
+
 <!DOCTYPE html>
 <html>
 <jsp:include page="/static/head.jsp"/>
@@ -33,7 +34,14 @@
 
                   <form class="signin-form" method="POST" action="<%=request.getContextPath()%>/mainservlet?action=crearViaje" >
 
-                    <h6>A continuación registre los siguientes datos:</h6>
+                    <h6>Registre los siguientes datos:</h6>
+
+                    <div class="form-group mb-2">
+                      <label class="label">Ciudad de origen:</label>
+                      <input type="text" class="form-control" aria-label="ciudadOrigen" name="ciudadOrigen" id ="ciudadOrigen" required>
+                      <label class="label">Ciudad de destino:</label>
+                      <input type="text" class="form-control" aria-label="ciudadDestino" name="ciudadDestino" id ="ciudadDestino" required>
+                    </div>
 
                     <div class="form-group mb-2">
                       <label class="label">Fecha de Reserva (aaaa-mm-dd):</label>
@@ -42,15 +50,20 @@
                       <input type="text" class="form-control" aria-label="fechaViaje" name="fechaViaje" id ="fechaViaje" required>
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group mb-2">
 
                       <div class="row">
-                        <label class="label">Cantidad de boletos:</label>
-                        <input type="number" class="form-control" id="cantidad" name="cantidad" aria-label="cantidad" min="0" max="30" required>
+                        <div class="col">
+                          <label class="label">Cantidad de boletos:</label>
+                          <input type="number" class="form-control" id="cantidad" name="cantidad" aria-label="cantidad" min="0" max="30" required>
+                        </div>
                       </div>
+
                       <div class="row">
-                        <label class="label"> Precio del boleto (sea honesto):</label>
-                        <input type="text" class="form-control" id="costoUnitario" name="costoUnitario" aria-label="costoUnitario"  required>
+                        <div class="col">
+                          <label class="label"> Precio del boleto (sea honesto):</label>
+                          <input type="text" class="form-control" id="costoUnitario" name="costoUnitario" aria-label="costoUnitario"  required>
+                        </div>
                       </div>
 
                       <div class="row">
@@ -70,28 +83,20 @@
                         <button type="submit" class="form-control btn btn-outline-warning px-3">Registrarse</button>
                       </div>
 
-                        <% if (request.getParameter("errorConfirmacion") != null) {%>
-                      <div class="form-group text-danger mb-3">¡Las contraseñas no coinciden!</div>
+                        <% if (request.getParameter("errorFechaString") != null) {%>
+                      <div class="form-group text-danger mb-3">¡Respetar el formato de las fechas!</div>
                         <% }%>
 
-                        <% if (request.getParameter("errorNombreApellido") != null) {%>
-                      <div class="form-group text-danger mb-3">¡Cuidado! Ingresa un nombre y apellido válidos :)</div>
+                        <% if (request.getParameter("errorfechaViaje") != null) {%>
+                      <div class="form-group text-danger mb-3">La fecha de viaje debe ser superior a la fecha actual</div>
                         <% }%>
 
-                        <% if (request.getParameter("errorEdad") != null) {%>
-                      <div class="form-group text-danger mb-3">Lo sentimos, debes tener entre 18 y 30 para registrarte :(</div>
+                        <% if (request.getParameter("errorCantidad") != null) {%>
+                      <div class="form-group text-danger mb-3">Debe registrar al menos 1 boleto</div>
                         <% }%>
 
-                        <% if (request.getParameter("errorCodigo") != null) {%>
-                      <div class="form-group text-danger mb-3">Revisa tu código, ¡debe tener exactamente 8 dígitos!</div>
-                        <% }%>
-
-                        <% if (request.getParameter("errorCorreo") != null) {%>
-                      <div class="form-group text-danger mb-3">Lo sentimos, debes ingresar un correo del formato PUCP (a*codigo*@pucp.edu.pe) :/</div>
-                        <% }%>
-
-                        <% if (request.getParameter("errorContrasena") != null) {%>
-                      <div class="form-group text-danger mb-3">¡Hey! Tu contraseña debe tener al menos una mayúscula, un número y un caracter especial :)</div>
+                        <% if (request.getParameter("errorCostoUnitario") != null) {%>
+                      <div class="form-group text-danger mb-3">Error al registrar el precio (sea honesto por favoe :D)</div>
                         <% }%>
                   </form>
                 </div>
